@@ -1,3 +1,4 @@
+/*
 function splitTextWithPreservedSpans(element) {
    const chars = [];
 
@@ -119,3 +120,114 @@ function setupSplitAnimation(selector) {
    window.addEventListener('scroll', checkAnimations);
 }
 setupSplitAnimation('.quote');
+*/
+
+
+
+//
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  function createDots() {
+    // Твоя логика создания точек
+  }
+
+  createDots();
+
+  window.addEventListener("resize", () => {
+    createDots();
+    setupTextAnimation(); // если текст может измениться при ресайзе
+  });
+
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "class"
+      ) {
+        const target = mutation.target;
+        if (
+          target.classList.contains("text") &&
+          target.classList.contains("animation") &&
+          target.classList.contains("animation-active")
+        ) {
+          setupTextAnimation(target);
+        }
+      }
+    }
+  });
+
+  // Следим за всеми .text.animation
+  document.querySelectorAll(".text.animation").forEach((el) => {
+    observer.observe(el, { attributes: true });
+    // Если класс уже есть при загрузке
+    if (el.classList.contains("animation-active")) {
+      setupTextAnimation(el);
+    }
+  });
+
+  function setupTextAnimation(el) {
+    if (el._animated) return; // чтобы не запускалось повторно
+    el._animated = true;
+
+    const mainText = new SplitType(el, {
+      types: "words, chars",
+      tagName: "span"
+    });
+
+    const words = mainText.words;
+
+    gsap.set(words, { opacity: 0, y: 20 });
+
+    gsap.fromTo(
+      el,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: el.closest(".hero__content") || el,
+          start: "top 75%",
+          end: "center center",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    ScrollTrigger.create({
+      trigger: el.closest(".hero__content") || el,
+      start: "top 75%",
+      end: "center center",
+      toggleActions: "play none none reverse",
+      onEnter: () => animateWordsIn(words),
+      //onLeaveBack: () => animateWordsOut(words)
+    });
+
+    if (typeof setupCenterOutCharAnimation === "function") {
+      setupCenterOutCharAnimation();
+    }
+  }
+
+  function animateWordsIn(words) {
+    gsap.to(words, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.05,
+      duration: 0.6,
+      ease: "power3.out",
+      overwrite: true
+    });
+  }
+
+  function animateWordsOut(words) {
+    gsap.to(words, {
+      opacity: 0,
+      y: 20,
+      stagger: 0.05,
+      duration: 0.6,
+      ease: "power2.in",
+      overwrite: true
+    });
+  }
+});
