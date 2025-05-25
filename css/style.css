@@ -2097,9 +2097,8 @@ body._touch .header .menu__list > li._active .menu__arrow {
 .n_sec-title > div > span {
   display: block;
   opacity: 0;
-  width: -moz-max-content;
-  width: max-content;
-  white-space: nowrap;
+  width: auto;
+  white-space: wrap;
 }
 
 .first-screen h1 > div span,
