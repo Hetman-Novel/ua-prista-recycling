@@ -3235,8 +3235,36 @@ body._touch .header .menu__list > li._active .menu__arrow {
   margin-top: 42px;
 }
 
-.page__items.line-with-circles {
-  border-bottom: 1px solid #05868E;
+.page__items.line-with-circles.animation::after {
+  opacity: 0;
+  transition: width 1.6s ease 1s;
+  width: 1px;
+}
+
+.page__items.line-with-circles.animation.animation-active::after {
+  opacity: 1;
+  width: 100%;
+}
+
+.page__items.line-with-circles.animation.animation-active .page__itemColumn::after {
+  opacity: 1;
+}
+
+.page__items.line-with-circles.animation .page__itemColumn::after {
+  opacity: 0;
+  transition: 0.5s ease 2.5s;
+}
+
+.page__items.line-with-circles::after {
+  background-color: #05868E;
+  content: "";
+  display: block;
+  height: 1px;
+  pointer-events: none;
+  position: relative;
+  top: 1px;
+  width: 100%;
+  z-index: 0;
 }
 
 .page__items.line-with-circles .page__item:nth-child(odd) .page__itemColumn:first-child::after {
@@ -3259,6 +3287,7 @@ body._touch .header .menu__list > li._active .menu__arrow {
   pointer-events: none;
   position: absolute;
   width: 25px;
+  z-index: 1;
 }
 
 .page__items.columns-with-image {
