@@ -438,11 +438,13 @@ main.main {
 }
 
 main.main.page-form {
+  background-color: #056972;
   display: flex;
   position: relative;
 }
 
 main.main.page-form .section-with-form {
+  background: none;
   margin: auto;
   padding-bottom: 122px;
   padding-top: 125px;
@@ -2681,7 +2683,8 @@ body._touch .header .menu__list > li._active .menu__arrow {
   font-size: 70px;
   font-weight: 800;
   line-height: 135%;
-  margin: 0 0 -13px;
+  margin: 0;
+  margin-bottom: -13px;
 }
 
 .about-us__block.overlay::after {
@@ -3853,6 +3856,14 @@ body._touch .header .menu__list > li._active .menu__arrow {
 
   .about-us__blockInfo .bg-number {
     top: calc(32px + -102 * ((100vw - 320px) / 1081));
+  }
+
+  .about-us__blockInfo .number {
+    font-size: calc(28px + 42 * ((100vw - 320px) / 1081));
+  }
+
+  .about-us__blockInfo .number {
+    margin-bottom: calc(-7px + -6 * ((100vw - 320px) / 1081));
   }
 
   .page-fs {
