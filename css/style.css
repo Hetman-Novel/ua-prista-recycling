@@ -1993,6 +1993,10 @@ body._touch .header .menu__list > li._active .menu__arrow {
   text-transform: uppercase;
 }
 
+.first-screen h1 .hyphen {
+  color: #0B7573;
+}
+
 .first-screen p {
   font-size: 26px;
   font-weight: 500;
@@ -2119,6 +2123,12 @@ body._touch .header .menu__list > li._active .menu__arrow {
 .page-fs h1 > div:nth-child(3) > span,
 .n_sec-title > div:nth-child(3) > span {
   animation-delay: 0.075s;
+}
+
+.first-screen h1 > div:nth-child(4) span,
+.page-fs h1 > div:nth-child(4) > span,
+.n_sec-title > div:nth-child(4) > span {
+  animation-delay: 0.095s;
 }
 
 .slide-up {
